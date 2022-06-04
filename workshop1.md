@@ -1,5 +1,18 @@
 # Workshop 1
 
+Please answer the questions below and submit the report for grading. Only one report with the names of all
+group members needs to be submitted (can be submitted by either of you on Moodle). Please make sure to
+submit a PDF containing your answers to the questions, and provide support for how you reached the answer in
+case of ambiguity. The questions in total account for 29 points, you get 1 free point for handing the assignment
+in. If you have any questions feel free to email me or ask in class.
+
+All answers should be based on the winemag_ws1.csv dataset provided on Moodle.
+
+Data description: This dataset contains prices and rating points of over 100,000 wines. Also included are
+information about the wines, such as country/province/region of origin, title/description (in text format),
+designation, variety, and winery. The name of the taster who gave the rating is also included. This dataset was
+originally taken from WineEnthusiast magazine.
+
 ## Question 1: Exploring the dataset (1 point per sub question, 10 points total)
 
 - a) How many wines are there in this dataset?
@@ -73,7 +86,7 @@ data.nsmallest(n=10, columns=['points']) # Multiple wines
 - a) Which country has the most number of wines?
 
 ```bash
-Code here soon
+Code here soon 
 ```
 
 - b) Which country has the most expensive wine based on mean price?
