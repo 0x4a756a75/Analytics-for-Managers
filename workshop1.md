@@ -43,8 +43,27 @@ data.nlargest(n=10, columns=['price']) # Highest = 3300.0
 ```
 
 - g) How many points are earned by the lowest rated wine in the dataset?
+
+```bash
+data.nsmallest(n=10, columns=['points']) # Lowest = 80
+```
+
 - h) How many points are earned by the highest rated wine in the dataset?
+
+```bash
+data.nlargest(n=10, columns=['points']) # Highest = 100
+```
+
 - i) What is the title, price, and variety of the highest rated wine in the dataset? (choose one if multiple
 wines share the highest points)
+
+```bash
+data.nlargest(n=10, columns=['points']) # Multiple wines
+```
+
 - j) What is the title, price, and variety of the lowest rated wine in the dataset? (choose one if multiple wines
 share the lowest points)
+
+```bash
+data.nsmallest(n=10, columns=['points']) # Multiple wines
+```
