@@ -67,3 +67,78 @@ share the lowest points)
 ```bash
 data.nsmallest(n=10, columns=['points']) # Multiple wines
 ```
+
+##  Question 2: Getting insights from the data (1 point per sub question, 10 points total)
+
+- a) Which country has the most number of wines?
+
+```bash
+Code here soon
+```
+
+- b) Which country has the most expensive wine based on mean price?
+
+```bash
+Code here soon
+```
+
+- c) For the country that has the most expensive wine, how many wines are from that country and what is the
+standard deviation of the price?
+
+```bash
+Code here soon
+```
+
+- d) Which country has the cheapest wine based on mean price?
+
+```bash
+Code here soon
+```
+
+- e) For the country that has the cheapest wine, how many wines are from that country and what is the
+standard deviation of the price?
+
+```bash
+Code here soon
+```
+
+- f) What is the 95% confidence interval of the mean price of wines from the most expensive country?
+
+```bash
+Code here soon
+```
+
+- g) What is the 95% confidence interval of the mean price of wines from the cheapest country?
+
+```bash
+Code here soon
+```
+
+- h) What is the average points and 95% confidence interval of wines tasted by Virginie?
+
+```bash
+Code here soon
+```
+
+- i) What is the average points and 95% confidence interval of wines tasted by Roger?
+
+```bash
+Code here soon
+```
+
+- j) Do Virginie and Roger give different ratings on average?
+
+```bash
+Code here soon
+```
+
+## Question 3: Effect of price on rating points (9 points total)
+
+- a) Using multiple regression, estimate the effect that price has on rating points. What is the size of the
+coefficient? Is the effect statistically significant? For each dollar increase in price, how many rating
+points are gained or lost on average? Include the following explanatory variables in your regression:
+price, desc_length, country, and taster_name.
+
+```bash
+Code here soon
+```
