@@ -25,7 +25,7 @@ import pandas as pd
 data = pd.read_csv("winemag_ws1.csv") # Import file
 data.head() # Check header
 data.nunique() # Get count for each header
-----
+----------
 country                      43
 description              118807
 designation               37977
@@ -86,26 +86,83 @@ data.nsmallest(n=10, columns=['points']) # Multiple wines
 - a) Which country has the most number of wines?
 
 ```bash
-Code here soon 
+data.country.value_counts().reset_index(name='variety') # US
 ```
 
 - b) Which country has the most expensive wine based on mean price?
 
 ```bash
-Code here soon
+data.groupby('country')['price'].mean().nlargest() # 
+----------
+Switzerland    72.833333
+England        52.677966
+Germany        43.483325
+Hungary        42.234375
+France         41.593193
 ```
 
 - c) For the country that has the most expensive wine, how many wines are from that country and what is the
 standard deviation of the price?
 
 ```bash
-Code here soon
+
+----------
+country
+Argentina                 24.579429
+Armenia                   14.500000
+Australia                 35.358701
+Austria                   31.368817
+Bosnia and Herzegovina    12.500000
+Brazil                    24.500000
+Bulgaria                  14.840909
+Canada                    35.776786
+Chile                     20.855480
+China                     18.000000
+Croatia                   25.529412
+Cyprus                    16.500000
+Czech Republic            22.363636
+Egypt                           NaN
+England                   52.677966
+France                    41.593193
+Georgia                   19.364865
+Germany                   43.483325
+Greece                    22.316038
+Hungary                   42.234375
+India                     13.750000
+Israel                    31.770419
+Italy                     40.046586
+Lebanon                   30.281250
+Luxembourg                23.400000
+Macedonia                 15.636364
+Mexico                    26.470588
+Moldova                   16.732143
+Morocco                   18.958333
+New Zealand               26.850565
+Peru                      18.062500
+Portugal                  26.583725
+Romania                   15.415842
+Serbia                    24.875000
+Slovakia                  16.000000
+Slovenia                  25.542857
+South Africa              24.332218
+Spain                     28.363957
+Switzerland               72.833333
+Turkey                    25.037500
+US                        36.757113
+Ukraine                    9.214286
+Uruguay                   26.326531
 ```
 
 - d) Which country has the cheapest wine based on mean price?
 
 ```bash
-Code here soon
+data.groupby('country')['price'].mean().nsmallest()
+----------
+Ukraine                    9.214286
+Bosnia and Herzegovina    12.500000
+India                     13.750000
+Armenia                   14.500000
+Bulgaria                  14.840909
 ```
 
 - e) For the country that has the cheapest wine, how many wines are from that country and what is the
