@@ -227,7 +227,7 @@ Confidence Interval: 83.2 ±63.840 (±76.7%) [19.360 – 147.040]
 - g) What is the 95% confidence interval of the mean price of wines from the cheapest country?
 
 ```bash
-Code here soon
+Confidence Interval: 9.555556 ±1.183 (±12.4%) [8.373 – 10.738]
 ```
 
 - h) What is the average points and 95% confidence interval of wines tasted by Virginie?
