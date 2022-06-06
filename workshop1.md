@@ -171,6 +171,51 @@ standard deviation of the price?
 
 ```bash
 data.country.value_counts().reset_index(name='variety') # Ukraine	9
+-----------------------------
+data.groupby('country')['price'].std()
+---------
+country
+Argentina                 23.187810
+Armenia                    0.707107
+Australia                 52.435820
+Austria                   29.472353
+Bosnia and Herzegovina     0.707107
+Brazil                    11.042202
+Bulgaria                   6.595938
+Canada                    20.449658
+Chile                     21.198849
+Croatia                   13.424205
+Cyprus                     3.195980
+Czech Republic            10.623302
+England                   15.173684
+France                    75.019022
+Georgia                    7.796330
+Germany                   61.557461
+Greece                    10.676626
+Hungary                   79.685552
+India                      3.488075
+Israel                    19.139034
+Italy                     37.576379
+Lebanon                   16.675262
+Luxembourg                 5.737305
+Macedonia                  1.658312
+Mexico                    18.629820
+Moldova                   10.279268
+Morocco                    5.973261
+New Zealand               16.977601
+Peru                      15.831260
+Portugal                  42.251228
+Romania                   12.424749
+Serbia                    10.548358
+Slovakia                        NaN
+Slovenia                  14.532178
+South Africa              21.522429
+Spain                     35.511151
+Switzerland               70.208262
+Turkey                    14.280893
+US                        25.421290
+Ukraine                    1.810463
+Uruguay                   20.424930
 ```
 
 - f) What is the 95% confidence interval of the mean price of wines from the most expensive country?
