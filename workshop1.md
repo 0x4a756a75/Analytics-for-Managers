@@ -87,6 +87,49 @@ data.nsmallest(n=10, columns=['points']) # Multiple wines
 
 ```bash
 data.country.value_counts().reset_index(name='variety') # US
+----------
+index	variety
+0	US	42133
+1	France	16711
+2	Italy	15069
+3	Spain	5049
+4	Portugal	4424
+5	Chile	3503
+6	Argentina	2947
+7	Austria	2562
+8	Australia	1835
+9	Germany	1653
+10	South Africa	1111
+11	New Zealand	1086
+12	Israel	390
+13	Greece	354
+14	Canada	173
+15	Bulgaria	108
+16	Hungary	107
+17	Romania	81
+18	Uruguay	81
+19	Turkey	67
+20	Slovenia	64
+21	Georgia	62
+22	Croatia	59
+23	Mexico	57
+24	England	52
+25	Brazil	49
+26	Moldova	43
+27	Lebanon	30
+28	Morocco	23
+29	Peru	12
+30	Czech Republic	11
+31	Ukraine	9
+32	Macedonia	9
+33	Cyprus	8
+34	Serbia	8
+35	India	6
+36	Switzerland	5
+37	Luxembourg	4
+38	Armenia	2
+39	Bosnia and Herzegovina	2
+40	Slovakia	1
 ```
 
 - b) Which country has the most expensive wine based on mean price?
