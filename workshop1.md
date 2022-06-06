@@ -106,6 +106,7 @@ standard deviation of the price?
 
 ```bash
 
+data.country.value_counts().reset_index(name='variety') # Switzerland	5
 ----------
 country
 Argentina                 24.579429
@@ -169,7 +170,7 @@ Bulgaria                  14.840909
 standard deviation of the price?
 
 ```bash
-Code here soon
+data.country.value_counts().reset_index(name='variety') # Ukraine	9
 ```
 
 - f) What is the 95% confidence interval of the mean price of wines from the most expensive country?
