@@ -255,6 +255,57 @@ Carrie          96
 Fiona           16
 Christina        5
 
+==========
+data.groupby('taster_name')['points'].std()
+------
+
+Alexander    1.910349
+Anna         2.613728
+Anne         2.399386
+Carrie       1.833413
+Christina    3.974921
+Fiona        1.612452
+Jeff         2.073288
+Jim          2.721407
+Joe          2.871274
+Kerin        2.482652
+Lauren       2.567411
+Matt         2.589008
+Michael      3.004753
+Mike         1.942260
+Paul         2.846984
+Roger        3.057812
+Sean         2.491038
+Susan        2.408882
+Virginie     3.003168
+
+==========
+data.groupby('taster_name')['points'].mean()
+------
+taster_name
+Alexander    85.851190
+Anna         88.395440
+Anne         90.619636
+Carrie       86.583333
+Christina    87.600000
+Fiona        87.250000
+Jeff         88.382682
+Jim          88.573874
+Joe          88.462954
+Kerin        88.859591
+Lauren       87.662822
+Matt         89.996675
+Michael      86.884141
+Mike         89.010554
+Paul         89.105101
+Roger        88.698220
+Sean         88.664426
+Susan        86.494761
+Virginie     89.222391
+
+
+==========
+
 
 ------------
 ```
