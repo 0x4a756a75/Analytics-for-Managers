@@ -221,7 +221,7 @@ data.groupby('country')['price'].std() # 1.810463
 - f) What is the 95% confidence interval of the mean price of wines from the most expensive country?
 
 ```bash
-Code here soon
+Confidence Interval: 83.2 ±63.840 (±76.7%) [19.360 – 147.040]
 ```
 
 - g) What is the 95% confidence interval of the mean price of wines from the cheapest country?
