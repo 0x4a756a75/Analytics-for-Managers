@@ -233,7 +233,30 @@ Confidence Interval: 9.555556 ±1.183 (±12.4%) [8.373 – 10.738]
 - h) What is the average points and 95% confidence interval of wines tasted by Virginie?
 
 ```bash
-Code here soon
+data.taster_name.value_counts()
+------
+Roger        19385
+Michael      11678
+Kerin         8169
+Paul          7469
+Virginie      7244
+Matt          4812
+Joe           4022
+Sean          3719
+Anna          3333
+Jim           3154
+Anne          2750
+Lauren        1474
+Susan          859
+Mike           379
+Jeff           358
+Alexander      336
+Carrie          96
+Fiona           16
+Christina        5
+
+
+------------
 ```
 
 - i) What is the average points and 95% confidence interval of wines tasted by Roger?
