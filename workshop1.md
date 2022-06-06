@@ -233,6 +233,10 @@ Confidence Interval: 9.555556 ±1.183 (±12.4%) [8.373 – 10.738]
 - h) What is the average points and 95% confidence interval of wines tasted by Virginie?
 
 ```bash
+
+Confidence Interval: 89.222391 ±0.0692 (±0.08%) [89.153 – 89.292]
+Virginie     89.222391
+
 data.taster_name.value_counts()
 ------
 Roger        19385
@@ -313,7 +317,8 @@ Virginie     89.222391
 - i) What is the average points and 95% confidence interval of wines tasted by Roger?
 
 ```bash
-Code here soon
+Roger        88.698220
+Confidence Interval: 88.698220 ±0.0430 (±0.05%) [88.655 – 88.741]
 ```
 
 - j) Do Virginie and Roger give different ratings on average?
