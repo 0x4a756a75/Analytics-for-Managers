@@ -141,6 +141,52 @@ England        52.677966
 Germany        43.483325
 Hungary        42.234375
 France         41.593193
+
+
+
+----
+country
+Argentina                 24.184192
+Armenia                   14.500000
+Australia                 35.851381
+Austria                   31.489272
+Bosnia and Herzegovina    12.500000
+Brazil                    24.500000
+Bulgaria                  14.370370
+Canada                    35.847953
+Chile                     20.769876
+Croatia                   25.929825
+Cyprus                    16.250000
+Czech Republic            22.363636
+England                   52.187500
+France                    41.177502
+Georgia                   19.116667
+Germany                   41.526802
+Greece                    22.111748
+Hungary                   43.943396
+India                     13.166667
+Israel                    31.649867
+Italy                     39.601105
+Lebanon                   29.933333
+Luxembourg                22.750000
+Macedonia                 15.666667
+Mexico                    28.298246
+Moldova                   17.837209
+Morocco                   19.043478
+New Zealand               26.913498
+Peru                      18.916667
+Portugal                  26.330437
+Romania                   12.975309
+Serbia                    24.875000
+Slovakia                  16.000000
+Slovenia                  25.315789
+South Africa              24.379960
+Spain                     28.251953
+Switzerland               83.200000
+Turkey                    24.417910
+US                        36.462793
+Ukraine                    9.555556
+Uruguay                   27.851852
 ```
 
 - c) For the country that has the most expensive wine, how many wines are from that country and what is the
