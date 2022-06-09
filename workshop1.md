@@ -86,36 +86,35 @@ data.nsmallest(n=10, columns=['points']) # Multiple wines
 - a) Which country has the most number of wines?
 
 ```bash
-data.country.value_counts().reset_index(name='variety') # US 42133
+data.groupby("country")["variety"].count().sort_values(ascending=False) # US 42133
 ```
 
 - b) Which country has the most expensive wine based on mean price?
 
 ```bash
-data.groupby('country')['price'].mean().nlargest() # Switzerland    72.833333
+data.groupby("country")["price"].mean().nlargest() # Switzerland    72.833333
 ```
 
 - c) For the country that has the most expensive wine, how many wines are from that country and what is the
 standard deviation of the price?
 
 ```bash
-
-data.country.value_counts().reset_index(name='variety') # Switzerland	5
-data.groupby('country')['price'].std() # 72.833333
+data.groupby("country")["variety"].count().sort_values(ascending=False) # Switzerland	5
+data.groupby("country")["price"].std() # 72.833333
 ```
 
 - d) Which country has the cheapest wine based on mean price?
 
 ```bash
-data.groupby('country')['price'].mean().nsmallest() # Ukraine 9.214286
+data.groupby("country")['price'].mean().nsmallest() # Ukraine 9.214286
 ```
 
 - e) For the country that has the cheapest wine, how many wines are from that country and what is the
 standard deviation of the price?
 
 ```bash
-data.country.value_counts().reset_index(name='variety') # Ukraine	9
-data.groupby('country')['price'].std() # 1.810463
+data.groupby("country")["variety"].count().sort_values(ascending=False) # Ukraine	9
+data.groupby("country")['price'].std() # 1.810463
 ```
 
 - f) What is the 95% confidence interval of the mean price of wines from the most expensive country?
@@ -158,5 +157,38 @@ points are gained or lost on average? Include the following explanatory variable
 price, desc_length, country, and taster_name.
 
 ```bash
-Code here soon
+import pandas as pd
+import numpy as np
+data = pd.read_csv("winemag_ws1.csv")
+%matplotlib inline
+data.plot.scatter("points", "price")
 ```
+![Screenshot 2022-06-09 at 3 15 34 PM](https://user-images.githubusercontent.com/96379191/172788073-ee560e31-6872-457e-a0f6-e9179ffacf76.png)
+
+```bash
+import pandas as pd
+import numpy as np
+data = pd.read_csv("winemag_ws1.csv")
+%matplotlib inline
+data.plot.scatter("points", "price")
+```
+```bash
+data[["price", "points"]].corr()
+```
+![Screenshot 2022-06-09 at 3 20 04 PM](https://user-images.githubusercontent.com/96379191/172788462-fd15b57c-b199-48b3-9ddd-09a770da93fa.png)
+
+```bash
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+model = smf.ols(' points ~ price', data=data).fit()
+print(model.summary())
+```
+![Screenshot 2022-06-09 at 3 21 22 PM](https://user-images.githubusercontent.com/96379191/172788697-792629ef-35cb-48b2-8765-04559446ca13.png)
+
+```bash
+model = smf.ols('points ~ price + desc_length + country + taster_name ', data=data).fit()
+print(model.summary())
+```
+![Screenshot 2022-06-09 at 3 26 06 PM](https://user-images.githubusercontent.com/96379191/172789536-9a6e56c5-20ca-4753-82ac-c94a7863bbcb.png)
+
