@@ -71,14 +71,14 @@ data.nlargest(n=10, columns=['points']) # Highest = 100
 wines share the highest points)
 
 ```bash
-data.nlargest(n=10, columns=['points']) # Multiple wines
+data.nlargest(n=10, columns=['points']) # title = Chambers Rosewood Vineyards NV Rare Muscat ,rice = 350.0, variety = Muscat
 ```
 
 - j) What is the title, price, and variety of the lowest rated wine in the dataset? (choose one if multiple wines
 share the lowest points)
 
 ```bash
-data.nsmallest(n=10, columns=['points']) # Multiple wines
+data.nsmallest(n=10, columns=['points']) # title = Viña Tarapacá 2015 Gran Reserva Chardonnay ,rice = 9.0, variety = Chardonnay
 ```
 
 ##  Question 2: Getting insights from the data (1 point per sub question, 10 points total)
@@ -161,7 +161,7 @@ import pandas as pd
 import numpy as np
 data = pd.read_csv("winemag_ws1.csv")
 %matplotlib inline
-data.plot.scatter("points", "price")
+data.plot.scatter("points", "price") # More expensive, better rating points
 ```
 ![Screenshot 2022-06-09 at 3 15 34 PM](https://user-images.githubusercontent.com/96379191/172788073-ee560e31-6872-457e-a0f6-e9179ffacf76.png)
 
