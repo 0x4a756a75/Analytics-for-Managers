@@ -164,7 +164,7 @@ data.plot.scatter("points", "price") # More expensive, better rating points
 
 
 ```bash
-data[["price", "points"]].corr() # For each dollar increase in price, 0.416954 rating points are gained or lost on average
+data[["price", "points"]].corr() 
 ```
 ![Screenshot 2022-06-09 at 7 53 54 PM](https://user-images.githubusercontent.com/96379191/172841022-87e37bbd-f676-4cf8-a7cf-1e52fa4e7d7e.png)
 
