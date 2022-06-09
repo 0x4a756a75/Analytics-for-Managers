@@ -16,31 +16,27 @@ originally taken from WineEnthusiast magazine.
 ## Question 1: Exploring the dataset (1 point per sub question, 10 points total)
 
 - a) How many wines are there in this dataset?
+
+```bash
+data.nunique() # 118840
+```
+
 - b) How many countries are represented in the dataset?
+
+```bash
+data.nunique() # 43
+```
+
 - c) How many tasters are there in the dataset?
+
+```bash
+data.nunique() # 19
+```
+
 - d) How many wine varieties are there in the dataset?
 
 ```bash
-import pandas as pd
-data = pd.read_csv("winemag_ws1.csv") # Import file
-data.head() # Check header
-data.nunique() # Get count for each header
-----------
-country                      43
-description              118807
-designation               37977
-points                       21
-price                       386
-province                    425
-region_1                   1229
-region_2                     17
-taster_name                  19
-taster_twitter_handle        15
-title                    118840
-variety                     707
-winery                    16757
-desc_length                 576
-dtype: int64
+data.nunique() # 707
 ```
 
 - e) What is the price of the cheapest wine in the dataset?
@@ -71,14 +67,14 @@ data.nlargest(n=10, columns=['points']) # Highest = 100
 wines share the highest points)
 
 ```bash
-data.nlargest(n=10, columns=['points']) # title = Chambers Rosewood Vineyards NV Rare Muscat ,rice = 350.0, variety = Muscat
+data.nlargest(n=10, columns=['points']) # title = Chambers Rosewood Vineyards NV Rare Muscat, price = 350.0, variety = Muscat
 ```
 
 - j) What is the title, price, and variety of the lowest rated wine in the dataset? (choose one if multiple wines
 share the lowest points)
 
 ```bash
-data.nsmallest(n=10, columns=['points']) # title = Viña Tarapacá 2015 Gran Reserva Chardonnay ,rice = 9.0, variety = Chardonnay
+data.nsmallest(n=10, columns=['points']) # title = Viña Tarapacá 2015 Gran Reserva Chardonnay, price = 9.0, variety = Chardonnay
 ```
 
 ##  Question 2: Getting insights from the data (1 point per sub question, 10 points total)
@@ -86,21 +82,21 @@ data.nsmallest(n=10, columns=['points']) # title = Viña Tarapacá 2015 Gran Res
 - a) Which country has the most number of wines?
 
 ```bash
-data.groupby("country")["variety"].count().sort_values(ascending=False) # US 42133
+data.groupby("country")["variety"].count().sort_values(ascending=False) # US 
 ```
 
 - b) Which country has the most expensive wine based on mean price?
 
 ```bash
-data.groupby("country")["price"].mean().nlargest() # Switzerland    72.833333
+data.groupby("country")["price"].mean().nlargest() # Switzerland 72.833333  
 ```
 
 - c) For the country that has the most expensive wine, how many wines are from that country and what is the
 standard deviation of the price?
 
 ```bash
-data.groupby("country")["variety"].count().sort_values(ascending=False) # Switzerland	5
-data.groupby("country")["price"].std() # 72.833333
+data.groupby("country")["variety"].count().sort_values(ascending=False) # 6
+data.groupby("country")["price"].std() # 67.736007
 ```
 
 - d) Which country has the cheapest wine based on mean price?
@@ -113,40 +109,40 @@ data.groupby("country")['price'].mean().nsmallest() # Ukraine 9.214286
 standard deviation of the price?
 
 ```bash
-data.groupby("country")["variety"].count().sort_values(ascending=False) # Ukraine	9
-data.groupby("country")['price'].std() # 1.810463
+data.groupby("country")["variety"].count().sort_values(ascending=False) # 14
+data.groupby("country")['price'].std() # 2.190138
 ```
 
 - f) What is the 95% confidence interval of the mean price of wines from the most expensive country?
 
 ```bash
-Confidence Interval: 83.2 ±63.840 (±76.7%) [19.360 – 147.040]
+[18.634 – 127.032]
 ```
 
 - g) What is the 95% confidence interval of the mean price of wines from the cheapest country?
 
 ```bash
-Confidence Interval: 9.555556 ±1.183 (±12.4%) [8.373 – 10.738]
+[8.067 – 10.362]
 ```
 
 - h) What is the average points and 95% confidence interval of wines tasted by Virginie?
 
 ```bash
-data.groupby('taster_name')['points'].mean() # Virginie     89.222391
-Confidence Interval: 89.222391 ±0.0692 (±0.08%) [89.153 – 89.292]
+data.groupby('taster_name')['points'].mean() # 89.220890
+95% confidence interval # [89.157 – 89.285]
 ```
 
 - i) What is the average points and 95% confidence interval of wines tasted by Roger?
 
 ```bash
-data.groupby('taster_name')['points'].mean() # Roger        88.698220
-Confidence Interval: 88.698220 ±0.0430 (±0.05%) [88.655 – 88.741]
+data.groupby('taster_name')['points'].mean() # 88.726156
+95% confidence interval # [88.686 – 88.766]
 ```
 
 - j) Do Virginie and Roger give different ratings on average?
 
 ```bash
-Yes # Roger and Virginie did not review any of the same wines, 88.741 < 89.153
+Yes # Roger and Virginie did not review any of the same wines, 88.686 < 89.157
 ```
 
 ## Question 3: Effect of price on rating points (9 points total)
@@ -185,6 +181,6 @@ print(model.summary()) # The size of the coefficient = 0.0309
 
 ```bash
 model = smf.ols('points ~ price + desc_length + country + taster_name ', data=data).fit()
-print(model.summary())
+print(model.summary()) # The size of the coefficient = 0.0172
 ```
 
