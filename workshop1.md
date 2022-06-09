@@ -163,22 +163,25 @@ data = pd.read_csv("winemag_ws1.csv")
 %matplotlib inline
 data.plot.scatter("points", "price") # More expensive, better rating points
 ```
-![Screenshot 2022-06-09 at 3 15 34 PM](https://user-images.githubusercontent.com/96379191/172788073-ee560e31-6872-457e-a0f6-e9179ffacf76.png)
+
+![Screenshot 2022-06-09 at 7 53 25 PM](https://user-images.githubusercontent.com/96379191/172840989-33fd632f-025d-4954-b7e7-85fe8fab03f2.png)
 
 
 ```bash
-data[["price", "points"]].corr() # For each dollar increase in price, 0.418126 rating points are gained or lost on average
+data[["price", "points"]].corr() # For each dollar increase in price, 0.416954 rating points are gained or lost on average
 ```
-![Screenshot 2022-06-09 at 3 20 04 PM](https://user-images.githubusercontent.com/96379191/172788462-fd15b57c-b199-48b3-9ddd-09a770da93fa.png)
+![Screenshot 2022-06-09 at 7 53 54 PM](https://user-images.githubusercontent.com/96379191/172841022-87e37bbd-f676-4cf8-a7cf-1e52fa4e7d7e.png)
+
 
 ```bash
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 model = smf.ols(' points ~ price', data=data).fit()
-print(model.summary()) # The size of the coefficient = 0.0314
+print(model.summary()) # The size of the coefficient = 0.0309
 ```
-![Screenshot 2022-06-09 at 3 21 22 PM](https://user-images.githubusercontent.com/96379191/172788697-792629ef-35cb-48b2-8765-04559446ca13.png)
+![Screenshot 2022-06-09 at 7 54 32 PM](https://user-images.githubusercontent.com/96379191/172841196-ca2c9005-fa0e-471e-9430-75fc128c4d82.png)
+
 
 ```bash
 model = smf.ols('points ~ price + desc_length + country + taster_name ', data=data).fit()
