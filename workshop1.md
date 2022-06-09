@@ -176,7 +176,7 @@ import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
 model = smf.ols(' points ~ price', data=data).fit()
-print(model.summary())
+print(model.summary()) 
 ```
 ![Screenshot 2022-06-09 at 3 21 22 PM](https://user-images.githubusercontent.com/96379191/172788697-792629ef-35cb-48b2-8765-04559446ca13.png)
 
