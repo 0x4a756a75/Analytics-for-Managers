@@ -86,107 +86,13 @@ data.nsmallest(n=10, columns=['points']) # Multiple wines
 - a) Which country has the most number of wines?
 
 ```bash
-data.country.value_counts().reset_index(name='variety') # US
-----------
-US                        42133
-France                    16711
-Italy                     15069
-Spain                      5049
-Portugal                   4424
-Chile                      3503
-Argentina                  2947
-Austria                    2562
-Australia                  1835
-Germany                    1653
-South Africa               1111
-New Zealand                1086
-Israel                      390
-Greece                      354
-Canada                      173
-Bulgaria                    108
-Hungary                     107
-Romania                      81
-Uruguay                      81
-Turkey                       67
-Slovenia                     64
-Georgia                      62
-Croatia                      59
-Mexico                       57
-England                      52
-Brazil                       49
-Moldova                      43
-Lebanon                      30
-Morocco                      23
-Peru                         12
-Czech Republic               11
-Ukraine                       9
-Macedonia                     9
-Cyprus                        8
-Serbia                        8
-India                         6
-Switzerland                   5
-Luxembourg                    4
-Armenia                       2
-Bosnia and Herzegovina        2
-Slovakia                      1
+data.country.value_counts().reset_index(name='variety') # US 42133
 ```
 
 - b) Which country has the most expensive wine based on mean price?
 
 ```bash
-data.groupby('country')['price'].mean().nlargest() # 
-----------
-Switzerland    72.833333
-England        52.677966
-Germany        43.483325
-Hungary        42.234375
-France         41.593193
-
-
-
-----
-country
-Argentina                 24.184192
-Armenia                   14.500000
-Australia                 35.851381
-Austria                   31.489272
-Bosnia and Herzegovina    12.500000
-Brazil                    24.500000
-Bulgaria                  14.370370
-Canada                    35.847953
-Chile                     20.769876
-Croatia                   25.929825
-Cyprus                    16.250000
-Czech Republic            22.363636
-England                   52.187500
-France                    41.177502
-Georgia                   19.116667
-Germany                   41.526802
-Greece                    22.111748
-Hungary                   43.943396
-India                     13.166667
-Israel                    31.649867
-Italy                     39.601105
-Lebanon                   29.933333
-Luxembourg                22.750000
-Macedonia                 15.666667
-Mexico                    28.298246
-Moldova                   17.837209
-Morocco                   19.043478
-New Zealand               26.913498
-Peru                      18.916667
-Portugal                  26.330437
-Romania                   12.975309
-Serbia                    24.875000
-Slovakia                  16.000000
-Slovenia                  25.315789
-South Africa              24.379960
-Spain                     28.251953
-Switzerland               83.200000
-Turkey                    24.417910
-US                        36.462793
-Ukraine                    9.555556
-Uruguay                   27.851852
+data.groupby('country')['price'].mean().nlargest() # Switzerland    72.833333
 ```
 
 - c) For the country that has the most expensive wine, how many wines are from that country and what is the
@@ -201,13 +107,7 @@ data.groupby('country')['price'].std() # 72.833333
 - d) Which country has the cheapest wine based on mean price?
 
 ```bash
-data.groupby('country')['price'].mean().nsmallest()
-----------
-Ukraine                    9.214286
-Bosnia and Herzegovina    12.500000
-India                     13.750000
-Armenia                   14.500000
-Bulgaria                  14.840909
+data.groupby('country')['price'].mean().nsmallest() # Ukraine 9.214286
 ```
 
 - e) For the country that has the cheapest wine, how many wines are from that country and what is the
@@ -233,98 +133,21 @@ Confidence Interval: 9.555556 ±1.183 (±12.4%) [8.373 – 10.738]
 - h) What is the average points and 95% confidence interval of wines tasted by Virginie?
 
 ```bash
-
+data.groupby('taster_name')['points'].mean() # Virginie     89.222391
 Confidence Interval: 89.222391 ±0.0692 (±0.08%) [89.153 – 89.292]
-Virginie     89.222391
-
-data.taster_name.value_counts()
-------
-Roger        19385
-Michael      11678
-Kerin         8169
-Paul          7469
-Virginie      7244
-Matt          4812
-Joe           4022
-Sean          3719
-Anna          3333
-Jim           3154
-Anne          2750
-Lauren        1474
-Susan          859
-Mike           379
-Jeff           358
-Alexander      336
-Carrie          96
-Fiona           16
-Christina        5
-
-==========
-data.groupby('taster_name')['points'].std()
-------
-
-Alexander    1.910349
-Anna         2.613728
-Anne         2.399386
-Carrie       1.833413
-Christina    3.974921
-Fiona        1.612452
-Jeff         2.073288
-Jim          2.721407
-Joe          2.871274
-Kerin        2.482652
-Lauren       2.567411
-Matt         2.589008
-Michael      3.004753
-Mike         1.942260
-Paul         2.846984
-Roger        3.057812
-Sean         2.491038
-Susan        2.408882
-Virginie     3.003168
-
-==========
-data.groupby('taster_name')['points'].mean()
-------
-taster_name
-Alexander    85.851190
-Anna         88.395440
-Anne         90.619636
-Carrie       86.583333
-Christina    87.600000
-Fiona        87.250000
-Jeff         88.382682
-Jim          88.573874
-Joe          88.462954
-Kerin        88.859591
-Lauren       87.662822
-Matt         89.996675
-Michael      86.884141
-Mike         89.010554
-Paul         89.105101
-Roger        88.698220
-Sean         88.664426
-Susan        86.494761
-Virginie     89.222391
-
-
-==========
-
-
-------------
 ```
 
 - i) What is the average points and 95% confidence interval of wines tasted by Roger?
 
 ```bash
-Roger        88.698220
+data.groupby('taster_name')['points'].mean() # Roger        88.698220
 Confidence Interval: 88.698220 ±0.0430 (±0.05%) [88.655 – 88.741]
 ```
 
 - j) Do Virginie and Roger give different ratings on average?
 
 ```bash
-Code here soon
+Yes # Roger and Virginie did not review any of the same wines, 88.741 < 89.153
 ```
 
 ## Question 3: Effect of price on rating points (9 points total)
