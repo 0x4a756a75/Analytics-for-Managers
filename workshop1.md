@@ -164,10 +164,8 @@ data.plot.scatter("points", "price") # More expensive, better rating points
 
 
 ```bash
-data[["price", "points"]].corr() 
+data[["price", "points"]].corr() # Price =1.000000	> Points = 0.416954
 ```
-![Screenshot 2022-06-09 at 7 53 54 PM](https://user-images.githubusercontent.com/96379191/172841022-87e37bbd-f676-4cf8-a7cf-1e52fa4e7d7e.png)
-
 
 ```bash
 import statsmodels.api as sm
@@ -176,8 +174,6 @@ import statsmodels.formula.api as smf
 model = smf.ols(' points ~ price', data=data).fit()
 print(model.summary()) # The size of the coefficient = 0.0309
 ```
-![Screenshot 2022-06-09 at 7 54 32 PM](https://user-images.githubusercontent.com/96379191/172841196-ca2c9005-fa0e-471e-9430-75fc128c4d82.png)
-
 
 ```bash
 model = smf.ols('points ~ price + desc_length + country + taster_name ', data=data).fit()
