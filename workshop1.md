@@ -165,15 +165,9 @@ data.plot.scatter("points", "price") # More expensive, better rating points
 ```
 ![Screenshot 2022-06-09 at 3 15 34 PM](https://user-images.githubusercontent.com/96379191/172788073-ee560e31-6872-457e-a0f6-e9179ffacf76.png)
 
+
 ```bash
-import pandas as pd
-import numpy as np
-data = pd.read_csv("winemag_ws1.csv")
-%matplotlib inline
-data.plot.scatter("points", "price")
-```
-```bash
-data[["price", "points"]].corr()
+data[["price", "points"]].corr() # For each dollar increase in price, 0.418126 rating points are gained or lost on average
 ```
 ![Screenshot 2022-06-09 at 3 20 04 PM](https://user-images.githubusercontent.com/96379191/172788462-fd15b57c-b199-48b3-9ddd-09a770da93fa.png)
 
