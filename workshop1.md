@@ -187,5 +187,4 @@ print(model.summary()) # The size of the coefficient = 0.0309
 model = smf.ols('points ~ price + desc_length + country + taster_name ', data=data).fit()
 print(model.summary())
 ```
-![Screenshot 2022-06-09 at 3 26 06 PM](https://user-images.githubusercontent.com/96379191/172789536-9a6e56c5-20ca-4753-82ac-c94a7863bbcb.png)
 
