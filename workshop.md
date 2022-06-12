@@ -204,27 +204,24 @@ two files, data_train.csv and data_test.csv. The split is based on time, with da
 2018-06-01 to 2018-09-24, and data_test.csv containing orders from 2018-09-25 to 2018-10-31. You can find a
 description of the columns in the appendix on the next page.
 
-Appendix: Description of the columns
-OrderId – Identifier of the order.
-StoreId – Identifier of the store.
-OrderPrice – Total gross value of the order in Euros.
-DeliveryType – Type of delivery; 1 = Delivery, 2 = Take Out, 3 = Pick-up
-OrdersInQueue – Number of orders in queue to be prepared at the moment the new order is received.
-OvenProductsInQueue – Number of products in the queue that needs to go through the oven at the moment
-the new order is received.
-OrdersInOven – Number of orders in the oven at the moment the new order is received.
-OrdersReadyForDispatch – Number of orders that are ready to get on the way at the moment the new order is
-received.
-DriversClockedIn – Number of drivers clocked in at the moment the new order is received.
-DriversOnTheWay – Number of drivers on the road at the moment the new order is received.
-ClockedInEmployees – Number of total employees clocked in, regardless of their role.
-ReceivedTimestamp – The moment the new order is received by the store.
-CompletedTimestamp – The moment the order is completed.
-OriginalEstimatedDrivingTimeSeconds – The on beforehand estimated driving time, based on a Google API
-call.
-EstimatedOrderCompletionTime – The time in seconds that the restaurant estimated would take to complete
-the order.
-ActualOrderCompletionTime – The actual time in seconds the restaurant took to complete the order.
+| Variable | Description |
+| --- | --- |
+| OrderId | Identifier of the order. |
+| StoreId | Identifier of the store. |
+| OrderPrice | Total gross value of the order in Euros. |
+| DeliveryType  |  Type of delivery; 1 = Delivery, 2 = Take Out, 3 = Pick-up |
+| OrdersInQueue  |  Number of orders in queue to be prepared at the moment the new order is received. |
+| OvenProductsInQueue  |  Number of products in the queue that needs to go through the oven at the moment the new order is received. |
+| OrdersInOven  |  Number of orders in the oven at the moment the new order is received. |
+| OrdersReadyForDispatch  |  Number of orders that are ready to get on the way at the moment the new order is received. |
+| DriversClockedIn  |  Number of drivers clocked in at the moment the new order is received. |
+| DriversOnTheWay  |  Number of drivers on the road at the moment the new order is received. |
+| ClockedInEmployees  |  Number of total employees clocked in, regardless of their role. |
+| ReceivedTimestamp  |  The moment the new order is received by the store. |
+| CompletedTimestamp  |  The moment the order is completed. | 
+| OriginalEstimatedDrivingTimeSeconds  |  The on beforehand estimated driving time, based on a Google API call. |
+| EstimatedOrderCompletionTime  |  The time in seconds that the restaurant estimated would take to complete the order. |
+| ActualOrderCompletionTime  |  The actual time in seconds the restaurant took to complete the order. |
 
 ## Question 1: Multiple regression for prediction (10 points total, 6 points for part a, 4 points for part b)
 
