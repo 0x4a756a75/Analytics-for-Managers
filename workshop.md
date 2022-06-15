@@ -306,7 +306,7 @@ data_train.csv after 2018-09-01 00:00:00. Report the MAE and RMSE of your model 
 the MAE and RMSE of EstimatedOrderCompletionTime as a benchmark. 
 
 ```bash
-data_time = data_train_inputs[data_train_inputs["ReceivedTimestamp"]<"2018-08-31"]
+data_time = data_train_inputs[data_train_inputs["ReceivedTimestamp"]<="2018-08-31"]
 model_time = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType +  OrdersInQueue +  \
                 OvenProductsInQueue +  OrdersInOven +  OrdersReadyForDispatch +  DriversClockedIn \
                 +  DriversOnTheWay +  ClockedInEmployees', data=data_time).fit()
