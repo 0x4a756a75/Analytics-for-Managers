@@ -235,8 +235,54 @@ What is the mean absolute error (MAE) of your predictions? What is the root mean
 and RMSE does this benchmark give? Are your model predictions better than this benchmark?
 
 ```bash
-Code here soon
+import pandas as pd
+import numpy as np
+
+data_train_inputs = pd.read_csv("data_train.csv")
+
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+model_train = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType +  OrdersInQueue +  \
+                OvenProductsInQueue +  OrdersInOven +  OrdersReadyForDispatch +  DriversClockedIn \
+                +  DriversOnTheWay +  ClockedInEmployees', data=data_train_inputs).fit()
+print(model_train.summary()) # 1652.6303 sec. so around 27 minutes and 30 sec.
 ```
+![Screenshot 2022-06-15 at 6 06 19 PM](https://user-images.githubusercontent.com/96379191/173802091-9c590639-2e07-4bd8-9dff-94683d04caa4.png)
+
+
+```bash
+predictions_model_train = model_train.predict(data_train_inputs)
+data_train_inputs["PredictActualOrderCompletionTime"] = predictions_model_train 
+data_train_inputs["PredictActualOrderCompletionTime"].mean() # 1792.5438166708318 so around 30 minutes
+```
+
+
+```bash
+import matplotlib.pyplot as plt
+%matplotlib inline
+y_line = 1*np.linspace(0, 1600, 1600)
+x_line = np.linspace(0, 1600, 1600)
+fig, ax = plt.subplots(figsize=(8,5))
+data2.iloc[::1000].plot.scatter("PredictActualOrderCompletionTime", "ActualOrderCompletionTime", ax=ax) 
+ax.plot(x_line, y_line, c="red")
+```
+
+```
+predictionsOK = model2.predict(data2)
+data2["PredictActualOrderCompletionTimeOK"] = predictionsOK
+data2["error"] = data2["ActualOrderCompletionTime"] - data2["PredictActualOrderCompletionTimeOK"]
+data2[["ActualOrderCompletionTime", "PredictActualOrderCompletionTimeOK", "error"]].iloc[::20000]
+
+data2["error"].sum() # 0
+
+rmse = np.sqrt(data2["error_squared"].mean())
+rmse
+
+data_cheapest[["error_abs", "EstimatedOrderCompletionTime"]].describe()
+```
+
+
 
 - b) Using the same predictors as part (a), train a new multiple linear regression model using all orders from
 data_train.csv received before 2018-08-31 23:59:59, and evaluate your model using all orders from
