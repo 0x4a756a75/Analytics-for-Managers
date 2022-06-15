@@ -264,22 +264,38 @@ import matplotlib.pyplot as plt
 y_line = 1*np.linspace(0, 1600, 1600)
 x_line = np.linspace(0, 1600, 1600)
 fig, ax = plt.subplots(figsize=(8,5))
-data2.iloc[::1000].plot.scatter("PredictActualOrderCompletionTime", "ActualOrderCompletionTime", ax=ax) 
+data_train_inputs.iloc[::1000].plot.scatter("PredictActualOrderCompletionTime", "ActualOrderCompletionTime", ax=ax) 
 ax.plot(x_line, y_line, c="red")
 ```
 
-```
-predictionsOK = model2.predict(data2)
-data2["PredictActualOrderCompletionTimeOK"] = predictionsOK
-data2["error"] = data2["ActualOrderCompletionTime"] - data2["PredictActualOrderCompletionTimeOK"]
-data2[["ActualOrderCompletionTime", "PredictActualOrderCompletionTimeOK", "error"]].iloc[::20000]
+![Screenshot 2022-06-15 at 7 41 19 PM](https://user-images.githubusercontent.com/96379191/173819020-3f190207-ea81-4a99-bc18-de82f392837e.png)
 
-data2["error"].sum() # 0
 
-rmse = np.sqrt(data2["error_squared"].mean())
-rmse
+```bash
+predictions = model_train.predict(data_train_inputs)
+data_train_inputs["PredictActualOrderCompletionTime"] = predictions
+data_train_inputs["error"] = data_train_inputs["ActualOrderCompletionTime"] - data_train_inputs["PredictActualOrderCompletionTime"]
+data_train_inputs[["ActualOrderCompletionTime", "PredictActualOrderCompletionTime", "error"]].iloc[::20000]
+
+data_train_inputs["error"].sum() # -8.71066004037857e-06
+data_train_inputs["error"].mean() # -3.049062947926712e-11
+
+data_train_inputs["error_abs"] = np.abs(data_train_inputs["error"])
+data_train_inputs["error_squared"] = data_train_inputs["error"]**2
+data_train_inputs[["error", "error_abs", "error_squared"]].describe()
+
+rmse = np.sqrt(data_train_inputs["error_squared"].mean())
+rmse # 1660.4688518530606
 
 data_cheapest[["error_abs", "EstimatedOrderCompletionTime"]].describe()
+```
+
+```bash
+data_train_inputs["benchmark"] = np.abs(data_train_inputs["ActualOrderCompletionTime"] - data_train_inputs["EstimatedOrderCompletionTime"])
+data_train_inputs["benchmark"].sum() # 205957719.0
+data_train_inputs["benchmark"].mean() # 730.797438845245
+rmse = np.sqrt(data_train_inputs["benchmark"].mean())
+rmse # 27.033265412177734 - Our model predication is better because than benchmark because close to 0 so close to red line
 ```
 
 
@@ -290,8 +306,22 @@ data_train.csv after 2018-09-01 00:00:00. Report the MAE and RMSE of your model 
 the MAE and RMSE of EstimatedOrderCompletionTime as a benchmark. 
 
 ```bash
-Code here soon
+data_time = data_train_inputs[data_train_inputs["ReceivedTimestamp"]<"2018-08-31"]
+model_time = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType +  OrdersInQueue +  \
+                OvenProductsInQueue +  OrdersInOven +  OrdersReadyForDispatch +  DriversClockedIn \
+                +  DriversOnTheWay +  ClockedInEmployees', data=data_time).fit()
+print(model_time.summary()) # 1895.9410 sec. so around 32 minutes.
 ```
+![Screenshot 2022-06-15 at 8 14 57 PM](https://user-images.githubusercontent.com/96379191/173824504-8faa56c6-150c-481a-8739-f85201c98b89.png)
+
+```bash
+predictions2 = model_time.predict(data_time)
+data_time["predicted"] = predictions2
+data_time["predicted"].mean() # 1761.3031669212153
+```
+
+![Screenshot 2022-06-15 at 9 49 51 PM](https://user-images.githubusercontent.com/96379191/173843761-8526969b-9083-4d97-bd25-9d02f1566ae1.png)
+
 
 ## Question 2: Feature engineering (10 points total, 5 points for part a, 5 points for part b)
 
