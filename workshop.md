@@ -305,22 +305,32 @@ data_train.csv received before 2018-08-31 23:59:59, and evaluate your model usin
 data_train.csv after 2018-09-01 00:00:00. Report the MAE and RMSE of your model predictions, and
 the MAE and RMSE of EstimatedOrderCompletionTime as a benchmark. 
 
-```bash
-data_time = data_train_inputs[data_train_inputs["ReceivedTimestamp"]<="2018-08-31"]
-model_time = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType +  OrdersInQueue +  \
-                OvenProductsInQueue +  OrdersInOven +  OrdersReadyForDispatch +  DriversClockedIn \
-                +  DriversOnTheWay +  ClockedInEmployees', data=data_time).fit()
-print(model_time.summary()) # 1895.9410 sec. so around 32 minutes.
-```
-![Screenshot 2022-06-15 at 8 14 57 PM](https://user-images.githubusercontent.com/96379191/173824504-8faa56c6-150c-481a-8739-f85201c98b89.png)
+Before 2018-08-31 23:59:59
 
 ```bash
-predictions2 = model_time.predict(data_time)
-data_time["predicted"] = predictions2
-data_time["predicted"].mean() # 1761.3031669212153
-```
 
-![Screenshot 2022-06-15 at 9 49 51 PM](https://user-images.githubusercontent.com/96379191/173843761-8526969b-9083-4d97-bd25-9d02f1566ae1.png)
+data3 = data2[data2["ReceivedTimestamp"]<="2018-08-31"]
+model3 = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType + OrdersInQueue + OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + DriversClockedIn + DriversOnTheWay + ClockedInEmployees', data=data3).fit()
+print(model3.summary())
+---
+predictions3 = model3.predict(data3)
+data3["predicted_price3"] = predictions3
+data3["predicted_price3"].mean() # 1761.3031669212153
+data3["error"] = data3["ActualOrderCompletionTime"] - data3["predicted_price"]
+data3["error"].sum() # -4442590.599154547
+data3["error"].mean() # -24.974228578561057
+---
+data3["error_abs"] = np.abs(data3["error"])
+data3["error_squared"] = data3["error"]**2
+rmse = np.sqrt(data3["error_squared"].mean())
+rmse # 1479.0345830890592
+
+```
+![Screenshot 2022-06-19 at 10 32 01 AM](https://user-images.githubusercontent.com/96379191/174463423-8613a78e-b4a1-4e3e-943b-9de08826d152.png)
+
+
+
+After 2018-09-01 00:00:00
 
 
 ## Question 2: Feature engineering (10 points total, 5 points for part a, 5 points for part b)
