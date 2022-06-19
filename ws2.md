@@ -143,8 +143,8 @@ data_eval["predictions_q2"] = predictions_q2
 data_eval["error_q2"] = data_eval["ActualOrderCompletionTime"] - data_eval["predictions_q2"]
 data_eval["error_q2_abs"] = np.abs(data_eval["error_q2"])
 data_eval["error_q2_sqr"] = data_eval["error_q2"] ** 2
-data_eval["error_q2_abs"].mean()
-np.sqrt(data_eval["error_q2_sqr"].mean()
+data_eval["error_q2_abs"].mean() # 866.0295202150039
+np.sqrt(data_eval["error_q2_sqr"].mean() #  1978.5869077854143
 ```
 
 #### 3. REMOVE DriversClockedIn + ADD  ClockedInEmployees + CHANGE Delivery Type => Improvement
@@ -176,7 +176,7 @@ data_eval["predictions_q2"] = predictions_q2
 data_eval["error_q2"] = data_eval["ActualOrderCompletionTime"] - data_eval["predictions_q2"]
 data_eval["error_q2_abs"] = np.abs(data_eval["error_q2"])
 data_eval["error_q2_sqr"] = data_eval["error_q2"] ** 2
-data_eval["error_q2_abs"].mean() # 766.837445736851 1783.
+data_eval["error_q2_abs"].mean() # 766.837445736851 1783
 np.sqrt(data_eval["error_q2_sqr"].mean())) # 1783.1310485601682
 ```
 #### 5. REMOVE DriversClockedIn + ADD ClockedInEmployees + CHANGE Delivery Type + ADD StoreId => Improvement
