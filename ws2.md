@@ -173,8 +173,8 @@ data_val_fit["predictions_q2"] = predictions_q2
 data_val_fit["error_q2"] = data_val_fit["ActualOrderCompletionTime"] - data_val_fit["predictions_q2"]
 data_val_fit["error_q2_abs"] = np.abs(data_val_fit["error_q2"])
 data_val_fit["error_q2_sqr"] = data_val_fit["error_q2"] ** 2
-data_val_fit["error_q2_abs"].mean() 766.837445736851 1783.
-np.sqrt(data_val_fit["error_q2_sqr"].mean())) 1783.1310485601682
+data_val_fit["error_q2_abs"].mean() # 766.837445736851 1783.
+np.sqrt(data_val_fit["error_q2_sqr"].mean())) # 1783.1310485601682
 ```
 #### 5. REMOVE DriversClockedIn + ADD ClockedInEmployees + CHANGE Delivery Type + ADD StoreId => Improvement
 
