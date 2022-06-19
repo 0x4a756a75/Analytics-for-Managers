@@ -45,8 +45,37 @@ description of the columns in the appendix on the next page.
 ### - a) Using the following columns as predictors (OrderPrice, DeliveryType, OrdersInQueue, OvenProductsInQueue, OrdersInOven, OrdersReadyForDispatch, DriversClockedIn, DriversOnTheWay, ClockedInEmployees), train a multiple linear regression model to predict ActualOrderCompletionTime. Use data_train.csv to fit the model, and also predict the ActualOrderCompletionTime for each order in this dataset. What is the R-squared value of this model? What is the mean absolute error (MAE) of your predictions? What is the root mean squared error (RMSE) of your predictions? Consider EstimatedOrderCompletionTime as a benchmark, what MAE and RMSE does this benchmark give? Are your model predictions better than this benchmark?
 
 ```bash
-Code here soon
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+import warnings
+warnings.filterwarnings('ignore')
+
+dt_train = pd.read_csv("data_train.csv")
+
+model_q1a = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType + OrdersInQueue \
+                + OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + DriversClockedIn \
+                + DriversOnTheWay + ClockedInEmployees', data=dt_train).fit()
+print(model_q1a.summary())
+
+model_q1a.predict(dt_train)
+predictions_q1a = model_q1a.predict(dt_train)
+dt_train['Predicted_ActualOrderCompletionTime'] = predictions_q1a
+dt_train["error"] = dt_train["ActualOrderCompletionTime"] - dt_train["Predicted_ActualOrderCompletionTime"]
+dt_train["error_abs"] = np.abs(dt_train["error"])
+dt_train["error_abs"].mean() # 804.9151964020217
+dt_train["error_squared"] = dt_train["error"]**2
+dt_train["error_squared"].mean() # 2757156.8079742217
+np.sqrt(dt_train["error_squared"].mean()) # 1660.4688518530606
+
+dt_train["error2"] = dt_train["ActualOrderCompletionTime"] - dt_train["EstimatedOrderCompletionTime"]
+dt_train["error2_abs"] = np.abs(dt_train["error2"])
+dt_train["error2_abs"].mean() # 730.797438845245
+dt_train["error2_squared"] = dt_train["error2"]**2
+np.sqrt(dt_train["error2_squared"].mean()) # 1710.3329185807993
 ```
+![Screenshot 2022-06-19 at 8 11 34 PM](https://user-images.githubusercontent.com/96379191/174480320-a8c297d4-dfeb-4a0a-bf56-36854089838f.png)
 
 
 
@@ -54,10 +83,26 @@ Code here soon
 
 
 ```bash
-Code here soon
+data_fit = dt_train[dt_train["ReceivedTimestamp"]<"2018-09-01 00:00:00"]
+data_val_fit = dt_train[dt_train["ReceivedTimestamp"]>="2018-09-01 00:00:00"]
+
+model_q1b = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType + OrdersInQueue \
+                + OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + DriversClockedIn \
+                + DriversOnTheWay + ClockedInEmployees', data=data_fit).fit()
+print(model_q1b.summary())
+
+predictions_q1b = model_q1b.predict(data_val_fit)
+data_val_fit["predictions_q1b"] = predictions_q1b
+data_val_fit["error_q1b"] = data_val_fit["ActualOrderCompletionTime"] - data_val_fit["predictions_q1b"]
+data_val_fit["error_q1b_abs"] = np.abs(data_val_fit["error_q1b"])
+data_val_fit["error_q1b_abs"].mean() # 860.4710086511534
+data_val_fit["error_q1b_sqr"] = data_val_fit["error_q1b"]**2
+np.sqrt(data_val_fit["error_q1b_sqr"].mean()) # 1976.9166229034124
+data_val_fit["error2_abs"].mean() # 832.3758964685946
+np.sqrt(data_val_fit["error2_squared"].mean()) # 2049.375258846716
 ```
 
-
+![Screenshot 2022-06-19 at 8 11 40 PM](https://user-images.githubusercontent.com/96379191/174480322-380ed41e-df84-475c-9565-1bacec8d19b6.png)
 
 
 ## Question 2: Feature engineering (10 points total, 5 points for part a, 5 points for part b)
@@ -68,8 +113,84 @@ received before 2018-08-31 23:59:59, and evaluate your model using all orders fr
 
 ### - a) Perform five modifications to the model from Question 1. Describe each modification (i.e., what you did). Did any of the modification improve the MAE of your model predictions?
 
+#### 1. REMOVE DriversClockedIn => Improvement
+
 ```bash
-Code here soon
+model_q2 = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType + OrdersInQueue + \
+                    OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + \
+                    DriversOnTheWay + ClockedInEmployees', data=data_fit).fit()
+                    
+predictions_q2 = model_q2.predict(data_val_fit)
+data_val_fit["predictions_q2"] = predictions_q2
+data_val_fit["error_q2"] = data_val_fit["ActualOrderCompletionTime"] - data_val_fit["predictions_q2"]
+data_val_fit["error_q2_abs"] = np.abs(data_val_fit["error_q2"])
+data_val_fit["error_q2_sqr"] = data_val_fit["error_q2"] ** 2
+data_val_fit["error_q2_abs"].mean() # 860.1997825822372
+np.sqrt(data_val_fit["error_q2_sqr"].mean())) # 1976.8750850551191
+```
+
+#### 2. REMOVE DriversClockedIn + ADD ClockedInEmployees => No Improvement
+
+```bash
+model_q2 = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType + OrdersInQueue + \
+                    OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + \
+                    DriversOnTheWay', data=data_fit).fit()
+                    
+predictions_q2 = model_q2.predict(data_val_fit)
+data_val_fit["predictions_q2"] = predictions_q2
+data_val_fit["error_q2"] = data_val_fit["ActualOrderCompletionTime"] - data_val_fit["predictions_q2"]
+data_val_fit["error_q2_abs"] = np.abs(data_val_fit["error_q2"])
+data_val_fit["error_q2_sqr"] = data_val_fit["error_q2"] ** 2
+print(data_val_fit["error_q2_abs"].mean(), np.sqrt(data_val_fit["error_q2_sqr"].mean()))
+```
+
+#### 3. REMOVE DriversClockedIn + ADD  ClockedInEmployees + CHANGE Delivery Type => Improvement
+
+```bash
+data_fit["DeliveryType_str"] = data_fit["DeliveryType"].astype(str)
+data_val_fit["DeliveryType_str"] = data_val_fit["DeliveryType"].astype(str)
+model_q2 = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType_str + OrdersInQueue + \
+                    OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + \
+                    DriversOnTheWay + ClockedInEmployees', data=data_fit).fit()
+
+predictions_q2 = model_q2.predict(data_val_fit)
+data_val_fit["predictions_q2"] = predictions_q2
+data_val_fit["error_q2"] = data_val_fit["ActualOrderCompletionTime"] - data_val_fit["predictions_q2"]
+data_val_fit["error_q2_abs"] = np.abs(data_val_fit["error_q2"])
+data_val_fit["error_q2_sqr"] = data_val_fit["error_q2"] ** 2
+data_val_fit["error_q2_abs"].mean() # 762.9927249510436 
+np.sqrt(data_val_fit["error_q2_sqr"].mean())) # 1783.8400237969329
+```
+#### 4. REMOVE DriversClockedIn + ADD ClockedInEmployees + CHANGE Delivery Type + ADD OrderId => No Improvement
+
+```bash
+model_q2 = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType_str + OrdersInQueue + \
+                    OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + \
+                    DriversOnTheWay + OrderId', data=data_fit).fit()
+                    
+predictions_q2 = model_q2.predict(data_val_fit)
+data_val_fit["predictions_q2"] = predictions_q2
+data_val_fit["error_q2"] = data_val_fit["ActualOrderCompletionTime"] - data_val_fit["predictions_q2"]
+data_val_fit["error_q2_abs"] = np.abs(data_val_fit["error_q2"])
+data_val_fit["error_q2_sqr"] = data_val_fit["error_q2"] ** 2
+data_val_fit["error_q2_abs"].mean() 766.837445736851 1783.
+np.sqrt(data_val_fit["error_q2_sqr"].mean())) 1783.1310485601682
+```
+#### 5. REMOVE DriversClockedIn + ADD ClockedInEmployees + CHANGE Delivery Type + ADD StoreId => Improvement
+
+```bash
+model_q2 = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType_str + OrdersInQueue + \
+                    OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + \
+                    DriversOnTheWay + StoreId', data=data_fit).fit()
+                    
+predictions_q2 = model_q2.predict(data_val_fit)
+data_val_fit["predictions_q2"] = predictions_q2
+data_val_fit["error_q2"] = data_val_fit["ActualOrderCompletionTime"] - data_val_fit["predictions_q2"]
+data_val_fit["error_q2_abs"] = np.abs(data_val_fit["error_q2"])
+data_val_fit["error_q2_sqr"] = data_val_fit["error_q2"] ** 2
+data_val_fit["error_q2_abs"].mean() # 761.762877695773 
+np.sqrt(data_val_fit["error_q2_sqr"].mean())) # 1782.6616267924035
+
 ```
 
 
@@ -84,7 +205,15 @@ Code here soon
 ### - a) Let’s simulate how well your model(s) would perform had you deployed it on 2018-09-25. For this question, please predict the ActualOrderCompletionTime of all orders in data_test.csv. Your predictions � should be submitted as a .csv file, following the same format as that of sample_submission.csv. Your submission file should have two columns, OrderId and PredictedOrderCompletionTime. Note that the ActualOrderCompletionTime column for data_test.csv is not provided, but I do have it and will use it for evaluating your predictions. Your predictions will be evaluated using the MAE metric (lower is better). Keep in mind that you may perform any kind of modifications you want, and you may also use any model(s) you like. However, you may only submit once and the MAE will be scored on that submission. The grading for this question is based on your prediction performance as measured by MAE. The top 25% of the submissions will get 9 points, the next 25% will get 7 points, the third 25% will get 5 points, and the bottom 25% will get 3 points. 
 
 ```bash
-Code here soon
+dt_test = pd.read_csv("data_test.csv")
+
+model_q3 = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType + OrdersInQueue + \
+OvenProductsInQueue + OrdersInOven + OrdersReadyForDispatch + DriversClockedIn + \
+DriversOnTheWay + ClockedInEmployees', data=dt_train).fit()
+
+predictions_q3 = model_q3.predict(dt_test)
+dt_test["predictions_q3"] = predictions_q3
+dt_test[["OrderId", "predictions_q3"]].to_csv("submission_q3.csv", index=False)
 ```
 
 
