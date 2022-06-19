@@ -164,7 +164,7 @@ data_eval["error_q2_sqr"] = data_eval["error_q2"] ** 2
 data_eval["error_q2_abs"].mean() # 762.9927249510436 
 np.sqrt(data_eval["error_q2_sqr"].mean())) # 1783.8400237969329
 ```
-#### 4. REMOVE DriversClockedIn + ADD ClockedInEmployees + CHANGE Delivery Type + ADD OrderId => No Improvement
+#### 4. REMOVE DriversClockedIn + ADD ClockedInEmployees + CHANGE Delivery Type + ADD OrderId => Improvement
 
 ```bash
 model_q2 = smf.ols('ActualOrderCompletionTime ~ OrderPrice + DeliveryType_str + OrdersInQueue + \
